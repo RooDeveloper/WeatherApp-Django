@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <img class="bg" src="{{bgname}}" >
+    <div class="box">
+        <div class="logo">
+            <h2>Weather App</h2>
+        </div>
+        <div class="weatherbox">
+            <div class="weatherinfo">
+                <div class="temp">
+                    <h1>{{weatherInfo.temp}}°C</h1>
+                </div>
+                <div class="curcity">
+                    <h2>{{weatherInfo.city}}</h2>
+                    <h4>{{weatherInfo.datetime}}</h4>
+                </div>
+            </div>
+            <div class="weathertype">
+                <img src=" https://openweathermap.org/img/wn/{{weatherInfo.icon}}@2x.png">
+                <h3 id="weatherType">{{weatherInfo.weather}}</h3>
+            </div>
+        </div>
+        <div class="sideglass"></div>
+        <div class="sidebox">
+            <div class="searchbar">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" name="city" id="city" placeholder="Search Location">
+                    <input type="submit" value="Search" class="btn">
+                </form>
+                <table>
+                    <form method="post">
+                        {% csrf_token %}
+                        <tr><td id="searchCity1"><input type="submit" name = "city" class="rowbtn" value="{{data.0}}"></td></tr>
+                    </form>
+                    <form method="post">
+                        {% csrf_token %}
+                        <tr><td id="searchCity2"><input type="submit" name = "city" class="rowbtn" value="{{data.1}}"></td></tr>
+                    </form>
+                    <form method="post">
+                        {% csrf_token %}
+                        <tr><td id="searchCity3"><input type="submit" name = "city" class="rowbtn" value="{{data.2}}"></td></tr>
+                    </form>
+                    <form method="post">
+                        {% csrf_token %}
+                        <tr><td id="searchCity4"><input type="submit" name = "city" class="rowbtn" value="{{data.3}}"></td></tr>
+                    </form>
+                    <form method="post">
+                        {% csrf_token %}
+                        <tr><td id="searchCity5"><input type="submit" name = "city" class="rowbtn" value="{{data.4}}"></td></tr>
+                    </form>
+                </table>
+            </div>
+            <div class="weatherdetails">
+                <h3>Weather Details</h3>
+                <table>
+                    <tr>
+                        <td>Cloudy</td>
+                        <td>{{weatherInfo.clouds}}%</td>
+                    </tr>
+                    <tr>
+                        <td>Humidity</td>
+                        <td>{{weatherInfo.humidity}}</td>
+                    </tr>
+                    <tr>
+                        <td>Wind</td>
+                        <td>{{weatherInfo.wind}} km/h</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/ip-geolocation-api-jquery-sdk@1.1.0/ipgeolocation.min.js"></script>
+    <script>
+         /*_ipgeolocation.enableSessionStorage(true);
+
+        var ip = sessionStorage.getItem("ip");
+        var country_name = sessionStorage.getItem("country_name");
+        var country_code2 = sessionStorage.getItem("country_code2");
+                
+        if (!ip || !country_name || !country_code2) {
+            _ipgeolocation.makeAsyncCallsToAPI(false);
+            _ipgeolocation.setFields("country_name,country_code2");
+            _ipgeolocation.getGeolocation(handleResponse, "YOUR_API_KEY");
+        }
+
+        function handleResponse(json) {
+            ip = json.ip;
+            country_name = json.country_name;
+            country_code2 = json.country_code2;
+        }
+                    
+        $(document).ready(function() {
+            
+            $.ajax({
+                    type: 'GET',
+                    url: "",
+                    data:{
+                        
+                        "IPval" : ip
+                    },
+                    dataType:"text",
+                    success: function (response) {
+                        alert("Hello " + ip + "!");
+                    },
+                    error : function(err){
+                        alert("error")
+                        //console.log("Error: " + JSON.stringify(err)); //just use the err here
+                    }
+            });
+            
+        });*/
+    </script>
+</body>
+</html>
